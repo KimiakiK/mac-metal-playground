@@ -8,9 +8,9 @@ var commandQueue = device.makeCommandQueue()!
 
 let vertexData: [Float] = [
     -1.0, -1.0, 0.0, 1.0,
-    1.0, -1.0, 0.0, 1.0,
-    -1.0,  1.0, 0.0, 1.0,
-    1.0,  1.0, 0.0, 1.0
+     0.5, -0.5, 0.0, 1.0,
+    -0.5,  0.5, 0.0, 1.0,
+     1.0,  1.0, 0.0, 1.0
 ]
 var vertexBuffer = device.makeBuffer(bytes: vertexData, length: vertexData.count * MemoryLayout<Float>.size)
 
@@ -50,6 +50,8 @@ class ViewController: NSViewController, MTKViewDelegate {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
+        renderPassDescriptor.colorAttachments[0].loadAction = .clear
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)!
         renderEncoder.setRenderPipelineState(renderPipeline)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
