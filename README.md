@@ -1,1 +1,1 @@
-# mac-metal-playground
+XcodeのPlaygroundで実行できるmacOSのmetalプログラム集
